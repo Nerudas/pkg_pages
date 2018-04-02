@@ -10,3 +10,32 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\MVC\Controller\AdminController;
+
+class PagesControllerPages extends AdminController
+{
+	/**
+	 * The prefix to use with controller messages.
+	 *
+	 * @var    string
+	 * @since  1.0.0
+	 */
+	protected $text_prefix = 'COM_PAGES';
+
+	/**
+	 *
+	 * Proxy for getModel.
+	 *
+	 * @param   string $name   The model name. Optional.
+	 * @param   string $prefix The class prefix. Optional.
+	 * @param   array  $config The array of possible config values. Optional.
+	 *
+	 * @return  JModelLegacy
+	 *
+	 * @since  1.0.0
+	 */
+	public function getModel($name = 'Page', $prefix = 'PagesModel', $config = array('ignore_request' => true))
+	{
+		return parent::getModel($name, $prefix, $config);
+	}
+}
