@@ -100,6 +100,7 @@ class PagesViewPages extends HtmlView
 			throw new Exception(implode("\n", $errors), 500);
 		}
 
+
 		return parent::display($tpl);
 	}
 

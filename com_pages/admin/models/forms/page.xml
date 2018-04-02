@@ -1,4 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
+	<fieldset>
+		<field name="title" type="text"
+			   label="JGLOBAL_TITLE"
+			   description="JFIELD_TITLE_DESC"
+			   class="input-xxlarge input-large-text"
+			   size="40"
+			   required="true"/>
+		<field name="content" type="editor"
+			   label="COM_PAGES_PAGE_CONTENT"
+			   hint="COM_PAGES_PAGE_CONTENT"
+			   filter="JComponentHelper::filterText"
+			   buttons="true"/>
+		<field name="tags" type="advtags"
+			   label="JTAG"
+			   multiple="true"/>
+	</fieldset>
+	<fieldset name="images" label="COM_PAGES_PAGE_IMAGES">
+		<field name="imagefolder" type="imagefolder" path="images/pages"/>
+		<field name="images" type="ajaximage"
+			   multiple="true"
+			   label="COM_PAGES_PAGE_IMAGES"/>
+	</fieldset>
+	<fieldset name="css" label="COM_PAGES_PAGE_CSS">
+		<fields name="css">
+			<field name="files" type="subform"
+				   label="COM_PAGES_PAGE_FILES"
+				   multiple="true">
+				<form>
+					<field name="file" type="text"
+						   label="COM_PAGES_PAGE_FILES_FILE"
+						   hint="COM_PAGES_PAGE_FILES_FILE"/>
+					<field name="version" type="text"
+						   default="auto"
+						   label="COM_PAGES_PAGE_FILES_VERSION"
+						   hint="COM_PAGES_PAGE_FILES_VERSION"/>
+					<field name="relative" type="list"
+						   label="COM_PAGES_PAGE_FILES_RELATIVE"
+						   default="1">
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+					</field>
+				</form>
+			</field>
+			<field name="code" type="editor"
+				   label="COM_PAGES_PAGE_CODE"
+				   filter="raw"
+				   editor="codemirror|none"
+				   syntax="css"/>
+		</fields>
+	</fieldset>
+	<fieldset name="js" label="COM_PAGES_PAGE_JS">
+		<fields name="js">
+			<field name="files" type="subform"
+				   label="COM_PAGES_PAGE_FILES"
+				   multiple="true">
+				<form>
+					<field name="file" type="text"
+						   label="COM_PAGES_PAGE_FILES_FILE"
+						   hint="COM_PAGES_PAGE_FILES_FILE"/>
+					<field name="version" type="text"
+						   default="auto"
+						   label="COM_PAGES_PAGE_FILES_VERSION"
+						   hint="COM_PAGES_PAGE_FILES_VERSION"/>
+					<field name="relative" type="list"
+						   label="COM_PAGES_PAGE_FILES_RELATIVE"
+						   default="1">
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+					</field>
+					<field name="async" type="list"
+						   label="COM_PAGES_PAGE_FILES_ASYNC"
+						   default="1">
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+					</field>
+				</form>
+			</field>
+			<field name="code" type="editor"
+				   label="COM_PAGES_PAGE_CODE"
+				   filter="raw"
+				   editor="codemirror|none"
+				   syntax="js"
+			/>
+		</fields>
+	</fieldset>
+	<fieldset name="attribs" label="JGLOBAL_FIELDSET_OPTIONS">
+		<fields name="attribs">
+			<field name="page_layout" type="componentlayout"
+				   label="JFIELD_ALT_LAYOUT_LABEL"
+				   description="JFIELD_ALT_COMPONENT_LAYOUT_DESCRIPTION"
+				   useglobal="true"
+				   extension="com_pages"
+				   view="page"/>
+		</fields>
+	</fieldset>
 
+	<fieldset name="publishingdata" label="">
+		<field name="state" type="list"
+			   label="JSTATUS"
+			   description="JFIELD_PUBLISHED_DESC"
+			   class="chzn-color-state"
+			   filter="intval"
+			   size="1"
+			   default="1">
+			<option value="1">JPUBLISHED</option>
+			<option value="-2">JTRASHED</option>
+		</field>
+		<field name="hits" type="number"
+			   label="JGLOBAL_HITS"
+			   class="readonly"
+			   size="6"
+			   readonly="true"
+			   filter="unset"/>
+		<field name="id" type="text"
+			   label="JGLOBAL_FIELD_ID_LABEL"
+			   description="JGLOBAL_FIELD_ID_DESC"
+			   class="readonly"
+			   size="10"
+			   default="0"
+			   readonly="true"/>
+	</fieldset>
+	<fieldset name="metadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
+		<field name="metakey" type="textarea"
+			   label="JFIELD_META_KEYWORDS_LABEL"
+			   description="JFIELD_META_KEYWORDS_DESC"
+			   rows="3"
+			   cols="30"/>
+		<field name="metadesc" type="textarea"
+			   label="JFIELD_META_DESCRIPTION_LABEL"
+			   description="JFIELD_META_DESCRIPTION_DESC"
+			   rows="3"
+			   cols="30"/>
+
+		<fields name="metadata">
+			<field name="robots" type="list"
+				   label="JFIELD_METADATA_ROBOTS_LABEL"
+				   description="JFIELD_METADATA_ROBOTS_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="index, follow">JGLOBAL_INDEX_FOLLOW</option>
+				<option value="noindex, follow">JGLOBAL_NOINDEX_FOLLOW</option>
+				<option value="index, nofollow">JGLOBAL_INDEX_NOFOLLOW</option>
+				<option value="noindex, nofollow">JGLOBAL_NOINDEX_NOFOLLOW</option>
+			</field>
+
+			<field name="author" type="text"
+				   label="JAUTHOR"
+				   description="JFIELD_METADATA_AUTHOR_DESC"
+				   size="20"/>
+
+			<field name="rights" type="textarea"
+				   label="JFIELD_META_RIGHTS_LABEL"
+				   description="JFIELD_META_RIGHTS_DESC"
+				   filter="string"
+				   cols="30"
+				   rows="2"/>
+
+			<field name="xreference" type="text" label="JFIELD_METADATA_XREFERENCE_LABEL"
+				   description="JFIELD_METADATA_FIELD_XREFERENCE_DESC"
+				   size="20"/>
+		</fields>
+	</fieldset>
 </form>

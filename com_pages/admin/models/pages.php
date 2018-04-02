@@ -145,7 +145,7 @@ class PagesModelPages extends ListModel
 			}
 			else
 			{
-				$text_columns = array('p.title', 'p.html', 'p.tags_search');
+				$text_columns = array('p.title', 'p.content', 'p.tags_search');
 
 				$sql = array();
 				foreach ($text_columns as $column)
