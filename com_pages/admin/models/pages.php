@@ -72,7 +72,7 @@ class PagesModelPages extends ListModel
 
 		// List state information.
 		$ordering  = empty($ordering) ? 'p.title' : $ordering;
-		$direction = empty($direction) ? 'desc' : $direction;
+		$direction = empty($direction) ? 'asc' : $direction;
 
 		parent::populateState($ordering, $direction);
 	}
@@ -161,7 +161,7 @@ class PagesModelPages extends ListModel
 
 		// Add the list ordering clause.
 		$ordering  = $this->state->get('list.ordering', 'p.title');
-		$direction = $this->state->get('list.direction', 'desc');
+		$direction = $this->state->get('list.direction', 'asc');
 		$query->order($db->escape($ordering) . ' ' . $db->escape($direction));
 
 		return $query;

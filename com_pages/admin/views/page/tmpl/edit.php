@@ -63,18 +63,18 @@ $doc->addScriptDeclaration('
 						</div>
 						<div>
 							<div class="row-fluid">
-								<div class="span2 text-right"><strong class="text-error">{id}</strong></div>
-								<div class="span10"><?php echo Text::_('COM_PAGES_PAGE_SHORTCODES_ID'); ?></div>
+								<div class="span4 text-right"><strong class="text-error">{id}</strong></div>
+								<div class="span8"><?php echo Text::_('COM_PAGES_PAGE_SHORTCODES_ID'); ?></div>
 							</div>
 							<div class="row-fluid">
-								<div class="span2 text-right"><strong class="text-error">{imageFolder}</strong></div>
-								<div class="span10">
+								<div class="span4 text-right"><strong class="text-error">{imageFolder}</strong></div>
+								<div class="span8">
 									<?php echo Text::_('COM_PAGES_PAGE_SHORTCODES_TITLE'); ?>
 								</div>
 							</div>
 							<div class="row-fluid">
-								<div class="span2 text-right"><strong class="text-error">{title}</strong></div>
-								<div class="span10">
+								<div class="span4 text-right"><strong class="text-error">{title}</strong></div>
+								<div class="span8">
 									<?php echo Text::_('COM_PAGES_PAGE_SHORTCODES_IMAGEFOLDER'); ?>
 								</div>
 							</div>
@@ -86,7 +86,7 @@ $doc->addScriptDeclaration('
 						<?php echo Text::_('COM_PAGES_PAGE_CSS'); ?>
 					</div>
 					<div class="code-field control-group">
-						<?php  echo $this->form->getInput('code', 'css'); ?>
+						<?php echo $this->form->getInput('code', 'css'); ?>
 					</div>
 					<div class="files-field control-group">
 						<?php echo $this->form->getInput('files', 'css'); ?>
@@ -97,10 +97,10 @@ $doc->addScriptDeclaration('
 						<?php echo Text::_('COM_PAGES_PAGE_JS'); ?>
 					</div>
 					<div class="code-field control-group">
-						<?php  echo $this->form->getInput('code', 'js'); ?>
+						<?php echo $this->form->getInput('code', 'js'); ?>
 					</div>
 					<div class="files-field control-group">
-						<?php  echo $this->form->getInput('files', 'js'); ?>
+						<?php echo $this->form->getInput('files', 'js'); ?>
 					</div>
 				</div>
 			</div>

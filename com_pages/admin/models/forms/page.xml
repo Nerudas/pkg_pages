@@ -47,7 +47,9 @@
 				   label="COM_PAGES_PAGE_CODE"
 				   filter="raw"
 				   editor="codemirror|none"
-				   syntax="css"/>
+				   height="250"
+				   syntax="css"
+				   buttons="false"/>
 		</fields>
 	</fieldset>
 	<fieldset name="js" label="COM_PAGES_PAGE_JS">
@@ -71,7 +73,7 @@
 					</field>
 					<field name="async" type="list"
 						   label="COM_PAGES_PAGE_FILES_ASYNC"
-						   default="1">
+						   default="0">
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
 					</field>
@@ -81,8 +83,9 @@
 				   label="COM_PAGES_PAGE_CODE"
 				   filter="raw"
 				   editor="codemirror|none"
+				   height="250"
 				   syntax="js"
-			/>
+				   buttons="false"/>
 		</fields>
 	</fieldset>
 	<fieldset name="attribs" label="JGLOBAL_FIELDSET_OPTIONS">
