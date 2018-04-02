@@ -58,9 +58,4 @@
 	<media destination="com_pages" folder="media">
 		<folder>css</folder>
 	</media>
-	<updateservers>
-		<server type="extension" priority="1" name="Pages Package">
-			https://site.com/update?extension=com_pages
-		</server>
-	</updateservers>
 </extension>
