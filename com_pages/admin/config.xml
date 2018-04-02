@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+	<fieldset name="global" label="JGLOBAL_FIELDSET_OPTIONS">
+		<field name="sef_advanced" type="hidden" default="1"/>
+		<field name="page_layout" type="componentlayout"
+			   label="COM_PAGES_PARAMS_PAGE_LAYOUT"
+			   extension="com_pages"
+			   view="page"/>
+	</fieldset>
+	<fieldset name="permissions"
+			  label="JCONFIG_PERMISSIONS_LABEL"
+			  description="JCONFIG_PERMISSIONS_DESC">
+		<field name="rules" type="rules"
+			   label="JCONFIG_PERMISSIONS_LABEL"
+			   class="inputbox"
+			   validate="rules"
+			   filter="rules"
+			   component="com_pages"
+			   section="component"/>
+	</fieldset>
+</config>
