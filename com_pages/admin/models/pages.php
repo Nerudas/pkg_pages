@@ -71,7 +71,7 @@ class PagesModelPages extends ListModel
 		$this->setState('filter.tags', $tags);
 
 		// List state information.
-		$ordering  = empty($ordering) ? 'p.title' : $ordering;
+		$ordering  = empty($ordering) ? 'p.id' : $ordering;
 		$direction = empty($direction) ? 'asc' : $direction;
 
 		parent::populateState($ordering, $direction);
@@ -160,7 +160,7 @@ class PagesModelPages extends ListModel
 		$query->group(array('p.id'));
 
 		// Add the list ordering clause.
-		$ordering  = $this->state->get('list.ordering', 'p.title');
+		$ordering  = $this->state->get('list.ordering', 'p.id');
 		$direction = $this->state->get('list.direction', 'asc');
 		$query->order($db->escape($ordering) . ' ' . $db->escape($direction));
 

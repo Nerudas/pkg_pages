@@ -119,6 +119,7 @@ class PagesViewPage extends HtmlView
 			{
 				JToolbarHelper::apply('page.apply');
 				JToolbarHelper::save('page.save');
+				JToolbarHelper::save2new('page.save2new');
 			}
 		}
 

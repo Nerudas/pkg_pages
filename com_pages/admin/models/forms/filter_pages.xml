@@ -17,7 +17,7 @@
 	<fields name="list">
 		<field name="fullordering" type="list"
 			   onchange="this.form.submit();"
-			   default="p.title ASC">
+			   default="p.id ASC">
 			<option value="">JGLOBAL_SORT_BY</option>
 			<option value="p.title ASC">JGLOBAL_TITLE_ASC</option>
 			<option value="p.title DESC">JGLOBAL_TITLE_DESC</option>
