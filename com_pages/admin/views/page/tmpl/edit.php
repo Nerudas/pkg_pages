@@ -99,6 +99,7 @@ $doc->addScriptDeclaration('
 					<div class="lead">
 						<?php echo Text::_('COM_PAGES_PAGE_JS'); ?>
 					</div>
+					<?php echo $this->form->renderField('jquery', 'js'); ?>
 					<div class="code-field control-group">
 						<?php echo $this->form->getInput('code', 'js'); ?>
 					</div>

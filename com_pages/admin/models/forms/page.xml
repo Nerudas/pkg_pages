@@ -41,7 +41,7 @@
 						   hint="COM_PAGES_PAGE_FILES_VERSION"/>
 					<field name="relative" type="list"
 						   label="COM_PAGES_PAGE_FILES_RELATIVE"
-						   default="1">
+						   default="0">
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
 					</field>
@@ -58,6 +58,13 @@
 	</fieldset>
 	<fieldset name="js" label="COM_PAGES_PAGE_JS">
 		<fields name="js">
+			<field name="jquery" type="radio"
+				   label="COM_PAGES_PAGE_JQUERY"
+				   default="0"
+				   class="btn-group btn-group-yesno">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
 			<field name="files" type="subform"
 				   label="COM_PAGES_PAGE_FILES"
 				   multiple="true">
@@ -71,7 +78,7 @@
 						   hint="COM_PAGES_PAGE_FILES_VERSION"/>
 					<field name="relative" type="list"
 						   label="COM_PAGES_PAGE_FILES_RELATIVE"
-						   default="1">
+						   default="0">
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
 					</field>
@@ -81,6 +88,13 @@
 						<option value="0">JNO</option>
 						<option value="1">JYES</option>
 					</field>
+					<field name="defer" type="list"
+						   label="COM_PAGES_PAGE_FILES_DEFER"
+						   default="0">
+						<option value="0">JNO</option>
+						<option value="1">JYES</option>
+					</field>
+
 				</form>
 			</field>
 			<field name="code" type="editor"

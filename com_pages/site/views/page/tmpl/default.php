@@ -10,3 +10,4 @@
 
 defined('_JEXEC') or die;
 
+echo $this->item->content;

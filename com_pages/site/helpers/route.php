@@ -10,3 +10,21 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Helper\RouteHelper;
+
+class PagesHelperRoute extends RouteHelper
+{
+	/**
+	 * Fetches the page route
+	 *
+	 * @param  int $id Company ID
+	 *
+	 * @return  string
+	 *
+	 * @since 1.0.0
+	 */
+	public static function getPageRoute($id = null)
+	{
+		return 'index.php?option=com_pages&view=page&id=' . $id;
+	}
+}

@@ -10,3 +10,11 @@
 
 defined('_JEXEC') or die;
 
+use Joomla\CMS\Factory;
+use Joomla\CMS\MVC\Controller\BaseController;
+
+JLoader::register('PagesHelperRoute', JPATH_SITE . '/components/com_pages/helpers/route.php');
+
+$controller = BaseController::getInstance('Pages');
+$controller->execute(Factory::getApplication()->input->get('task'));
+$controller->redirect();
