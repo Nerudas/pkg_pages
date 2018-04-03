@@ -138,8 +138,9 @@ class PagesModelPage extends AdminModel
 		}
 
 		// Set update images links
-		$saveurl = Uri::base(true) . '/index.php?option=com_companies&task=company.updateImages&id='
+		$saveurl = Uri::base(true) . '/index.php?option=com_pages&task=page.updateImages&id='
 			. $id . '&field=';
+		$form->setFieldAttribute('header', 'saveurl', $saveurl . 'header');
 		$form->setFieldAttribute('images', 'saveurl', $saveurl . 'images');
 
 		return $form;
@@ -250,9 +251,11 @@ class PagesModelPage extends AdminModel
 
 			// Save images
 			$data['images']      = (!isset($data['images'])) ? '' : $data['images'];
+			$data['header']      = (!isset($data['header'])) ? '' : $data['header'];
 			$data['imagefolder'] = (!empty($data['imagefolder'])) ? $data['imagefolder'] :
 				$this->imageFolderHelper->getItemImageFolder($id);
 
+			$this->imageFolderHelper->saveItemImages($id, $data['imagefolder'], '#__pages', 'header', $data['header']);
 			$this->imageFolderHelper->saveItemImages($id, $data['imagefolder'], '#__pages', 'images', $data['images']);
 
 			return $id;

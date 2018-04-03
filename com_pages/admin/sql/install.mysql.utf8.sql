@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS `#__pages` (
   `id`          INT(11)          NOT NULL AUTO_INCREMENT,
   `title`       VARCHAR(255)     NOT NULL DEFAULT '',
   `content`     LONGTEXT         NOT NULL DEFAULT '',
+  `header`      TEXT             NOT NULL DEFAULT '',
   `images`      LONGTEXT         NOT NULL DEFAULT '',
   `css`         LONGTEXT         NOT NULL DEFAULT '',
   `js`          LONGTEXT         NOT NULL DEFAULT '',

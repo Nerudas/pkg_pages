@@ -18,7 +18,7 @@ use Joomla\CMS\Factory;
 $app = Factory::getApplication();
 $doc = Factory::getDocument();
 
-HTMLHelper::stylesheet('media/com_companies/css/admin-company.min.css', array('version' => 'auto'));
+HTMLHelper::stylesheet('media/com_pages/css/admin-page.min.css', array('version' => 'auto'));
 
 HTMLHelper::_('jquery.framework');
 HTMLHelper::_('behavior.formvalidator');
@@ -48,6 +48,9 @@ $doc->addScriptDeclaration('
 		<div class="row-fluid adminform">
 			<div class="span7">
 				<div class="content-field control-group">
+					<?php echo $this->form->getInput('header'); ?>
+				</div>
+				<div class="content-field control-group">
 					<?php echo $this->form->getInput('content'); ?>
 				</div>
 				<div class="content-field control-group">
@@ -67,13 +70,13 @@ $doc->addScriptDeclaration('
 								<div class="span8"><?php echo Text::_('COM_PAGES_PAGE_SHORTCODES_ID'); ?></div>
 							</div>
 							<div class="row-fluid">
-								<div class="span4 text-right"><strong class="text-error">{imageFolder}</strong></div>
+								<div class="span4 text-right"><strong class="text-error">{title}</strong></div>
 								<div class="span8">
 									<?php echo Text::_('COM_PAGES_PAGE_SHORTCODES_TITLE'); ?>
 								</div>
 							</div>
 							<div class="row-fluid">
-								<div class="span4 text-right"><strong class="text-error">{title}</strong></div>
+								<div class="span4 text-right"><strong class="text-error">{imageFolder}</strong></div>
 								<div class="span8">
 									<?php echo Text::_('COM_PAGES_PAGE_SHORTCODES_IMAGEFOLDER'); ?>
 								</div>

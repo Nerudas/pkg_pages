@@ -18,8 +18,12 @@
 	</fieldset>
 	<fieldset name="images" label="COM_PAGES_PAGE_IMAGES">
 		<field name="imagefolder" type="imagefolder" path="images/pages"/>
+		<field name="header" type="ajaximage"
+			   filename="header"
+			   label="COM_PAGES_PAGE_HEADER"/>
 		<field name="images" type="ajaximage"
 			   multiple="true"
+			   subfolder="content"
 			   label="COM_PAGES_PAGE_IMAGES"/>
 	</fieldset>
 	<fieldset name="css" label="COM_PAGES_PAGE_CSS">
