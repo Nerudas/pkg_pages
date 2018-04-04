@@ -172,14 +172,13 @@ class PagesViewPage extends HtmlView
 		{
 			$this->params->def('page_heading', Text::_('COM_PAGES_PAGE'));
 		}
-
 		// Set pathway title
 		$title = array();
 		foreach ($pathway->getPathWay() as $value)
 		{
 			$title[] = $value->name;
 		}
-		$title = implode(' / ', $title);
+		$title = (!empty($title))? implode(' / ', $title): $this->params->get('page_heading');
 
 		// Set Meta Title
 		$this->document->setTitle($title);
