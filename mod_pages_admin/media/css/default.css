@@ -1,0 +1,19 @@
+/*
+ * @package    Pages - Administrator Module
+ * @version    1.0.0
+ * @author     Nerudas  - nerudas.ru
+ * @copyright  Copyright (c) 2013 - 2018 Nerudas. All rights reserved.
+ * @license    GNU/GPL license: http://www.gnu.org/copyleft/gpl.html
+ * @link       https://nerudas.ru
+ */
+
+[data-mod-pages-admin] .result {
+	display: none;
+}
+
+[data-mod-pages-admin] .actions {
+	text-align: right;
+}
+[data-mod-pages-admin] .table {
+	margin-bottom: 0;
+}

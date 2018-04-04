@@ -16,7 +16,7 @@
 	</languages>
 	<files>
 		<folder type="component" id="com_pages">com_pages</folder>
-		<!--<folder type="module" id="mod_admin_pages" client="administrator">mod_admin_pages</folder>-->
+		<folder type="module" id="mod_pages_admin" client="administrator">mod_pages_admin</folder>
 	</files>
 	<updateservers>
 		<server type="extension" priority="1" name="Pages Package">

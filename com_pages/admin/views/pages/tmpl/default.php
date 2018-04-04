@@ -30,7 +30,7 @@ $userId    = $user->get('id');
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
 
-$columns = 6;
+$columns = 5;
 
 ?>
 
@@ -42,7 +42,7 @@ $columns = 6;
 			<?php echo Text::_('JGLOBAL_NO_MATCHING_RESULTS'); ?>
 		</div>
 	<?php else : ?>
-		<table id="companiesList" class="table table-striped">
+		<table id="pagesList" class="table table-striped">
 			<thead>
 			<tr>
 				<th width="1%" class="center">

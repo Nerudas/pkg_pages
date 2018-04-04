@@ -14,5 +14,5 @@ Thank you for your understanding.
 * **Pages Component**  
 Component for create individual pages on site
 
-* **Admin Pages Module**  
+* **Pages - Administrator Module**  
 Module for displaying information about pages in the admin panel
