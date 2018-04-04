@@ -164,21 +164,15 @@ class PagesViewPage extends HtmlView
 		$menus    = $app->getMenu();
 		$menu     = $menus->getActive();
 
-		if ($menu)
-		{
-			$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
-		}
-		else
-		{
-			$this->params->def('page_heading', Text::_('COM_PAGES_PAGE'));
-		}
+		$this->params->def('page_heading', $this->params->get('page_title', $menu->title));
+
 		// Set pathway title
 		$title = array();
 		foreach ($pathway->getPathWay() as $value)
 		{
 			$title[] = $value->name;
 		}
-		$title = (!empty($title))? implode(' / ', $title): $this->params->get('page_heading');
+		$title = (!empty($title)) ? implode(' / ', $title) : $this->params->get('page_title', $menu->title);
 
 		// Set Meta Title
 		$this->document->setTitle($title);
