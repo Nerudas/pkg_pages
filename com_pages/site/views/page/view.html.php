@@ -300,11 +300,11 @@ class PagesViewPage extends HtmlView
 						$attribs = array();
 						if (!empty($file['async']))
 						{
-							$attribs['async'] = 'true';
+							$attribs['async'] = 'async';
 						}
 						if (!empty($file['defer']))
 						{
-							$attribs['defer'] = 'true';
+							$attribs['defer'] = 'defer';
 						}
 						HTMLHelper::script($file['file'], $options, $attribs);
 					}
