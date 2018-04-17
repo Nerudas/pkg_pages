@@ -47,19 +47,5 @@
 				}
 			});
 		}
-
-		$.ajax({
-			type: 'POST',
-			dataType: 'json',
-			url: '',
-			data: {},
-
-			complete: function (response) {
-			},
-			success: function (response) {
-			},
-			error: function (response) {
-			}
-		});
 	});
 })(jQuery);
