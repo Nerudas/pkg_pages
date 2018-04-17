@@ -248,15 +248,18 @@ class PagesModelPage extends AdminModel
 		if (parent::save($data))
 		{
 			$id = $this->getState($this->getName() . '.id');
-
 			// Save images
-			$data['images']      = (!isset($data['images'])) ? '' : $data['images'];
-			$data['header']      = (!isset($data['header'])) ? '' : $data['header'];
 			$data['imagefolder'] = (!empty($data['imagefolder'])) ? $data['imagefolder'] :
 				$this->imageFolderHelper->getItemImageFolder($id);
 
-			$this->imageFolderHelper->saveItemImages($id, $data['imagefolder'], '#__pages', 'header', $data['header']);
-			$this->imageFolderHelper->saveItemImages($id, $data['imagefolder'], '#__pages', 'images', $data['images']);
+			if (isset($data['header']))
+			{
+				$this->imageFolderHelper->saveItemImages($id, $data['imagefolder'], '#__pages', 'header', $data['header']);
+			}
+			if (isset($data['images']))
+			{
+				$this->imageFolderHelper->saveItemImages($id, $data['imagefolder'], '#__pages', 'images', $data['images']);
+			}
 
 			return $id;
 		}
