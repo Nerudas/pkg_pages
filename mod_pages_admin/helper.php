@@ -31,6 +31,9 @@ class ModPagesAdminHelper
 		{
 			$app = Factory::getApplication();
 
+			$language = Factory::getLanguage();
+			$language->load('com_pages', JPATH_ADMINISTRATOR, $language->getTag(), true);
+
 			BaseDatabaseModel::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_pages/models', 'PagesModel');
 			$model = BaseDatabaseModel::getInstance('Pages', 'PagesModel', array('ignore_request' => false));
 			$app->setUserState('com_pages.pages.list', array(
