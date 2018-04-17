@@ -51,6 +51,10 @@ class ModPagesAdminHelper
 
 				return $response;
 			}
+			else
+			{
+				throw new Exception(Text::_('JGLOBAL_NO_MATCHING_RESULTS'), 404);
+			}
 		}
 
 		throw new Exception(Text::_('MOD_PAGES_ADMIN_ERROR_MODULE_NOT_FOUND'), 404);
