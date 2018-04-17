@@ -14,6 +14,6 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Helper\ModuleHelper;
 
 $language = Factory::getLanguage();
-$language->load('com_board', JPATH_ADMINISTRATOR, $language->getTag(), true);
+$language->load('com_pages', JPATH_ADMINISTRATOR, $language->getTag(), true);
 
 require ModuleHelper::getLayoutPath($module->module, $params->get('layout', 'default'));
