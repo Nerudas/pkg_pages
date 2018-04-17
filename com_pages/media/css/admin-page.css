@@ -25,3 +25,11 @@
 	left: 0;
 	bottom: -43px;
 }
+
+#toolbar #toolbar-goTo {
+	float: right;
+}
+
+#toolbar #toolbar-goTo .btn {
+	margin-right: 0;
+}

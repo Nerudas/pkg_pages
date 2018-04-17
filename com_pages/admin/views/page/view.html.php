@@ -13,6 +13,7 @@ defined('_JEXEC') or die;
 use Joomla\CMS\MVC\View\HtmlView;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Application\SiteApplication;
 
 class PagesViewPage extends HtmlView
 {
@@ -121,6 +122,15 @@ class PagesViewPage extends HtmlView
 				JToolbarHelper::save('page.save');
 				JToolbarHelper::save2new('page.save2new');
 			}
+
+			// Go to page
+			JLoader::register('PagesHelperRoute', JPATH_SITE . '/components/com_pages/helpers/route.php');
+			$siteRouter = SiteApplication::getRouter();
+			$pageLink = $siteRouter->build(PagesHelperRoute::getPageRoute($this->item->id))->toString();
+			$pageLink = str_replace('administrator/', '', $pageLink);
+			$toolbar = JToolBar::getInstance('toolbar');
+			$toolbar->appendButton('Custom', '<a href="' . $pageLink . '" class="btn btn-small btn-primary"
+					target="_blank">' . Text::_('COM_PAGES_PAGE_GO_TO') . '</a>', 'goTo');
 		}
 
 		JToolbarHelper::cancel('page.cancel', 'JTOOLBAR_CLOSE');
