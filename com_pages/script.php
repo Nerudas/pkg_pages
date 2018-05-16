@@ -184,4 +184,26 @@ class com_PagesInstallerScript
 			}
 		}
 	}
+	/**
+	 * Change database structure && delete association
+	 *
+	 * @param  \stdClass $parent - Parent object calling object.
+	 *
+	 * @return void
+	 *
+	 * @since  1.0.5
+	 */
+	public function update($parent)
+	{
+		$db      = Factory::getDbo();
+		$table   = '#__pages';
+		$columns = $db->getTableColumns($table);
+
+		// Change tags_map format
+		if ($columns['tags_map'] == 'longtext')
+		{
+			$db->setQuery("ALTER TABLE " . $table . " MODIFY `tags_map` MEDIUMTEXT NOT NULL DEFAULT ''")
+				->query();
+		}
+	}
 }
