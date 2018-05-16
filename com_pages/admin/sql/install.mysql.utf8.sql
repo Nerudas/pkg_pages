@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `#__pages` (
   `hits`        INT(10) UNSIGNED NOT NULL DEFAULT '0',
   `metadata`    MEDIUMTEXT       NOT NULL DEFAULT '',
   `tags_search` MEDIUMTEXT       NOT NULL DEFAULT '',
-  `tags_map`    LONGTEXT         NOT NULL DEFAULT '',
+  `tags_map`    MEDIUMTEXT       NOT NULL DEFAULT '',
   UNIQUE KEY `id` (`id`)
 )
   ENGINE = MyISAM
