@@ -180,11 +180,13 @@ class PagesModelPage extends AdminModel
 		$filter = InputFilter::getInstance();
 		$table  = $this->getTable();
 		$db     = Factory::getDbo();
+		$isNew  = true;
 
 		// Load the row if saving an existing type.
 		if ($pk > 0)
 		{
 			$table->load($pk);
+			$isNew = false;
 		}
 
 		$data['id'] = (!isset($data['id'])) ? 0 : $data['id'];
@@ -252,10 +254,17 @@ class PagesModelPage extends AdminModel
 			$data['imagefolder'] = (!empty($data['imagefolder'])) ? $data['imagefolder'] :
 				$this->imageFolderHelper->getItemImageFolder($id);
 
+			if ($isNew)
+			{
+				$data['header'] = (isset($data['header'])) ? $data['header'] : '';
+				$data['images'] = (isset($data['images'])) ? $data['images'] : array();
+			}
+
 			if (isset($data['header']))
 			{
 				$this->imageFolderHelper->saveItemImages($id, $data['imagefolder'], '#__pages', 'header', $data['header']);
 			}
+
 			if (isset($data['images']))
 			{
 				$this->imageFolderHelper->saveItemImages($id, $data['imagefolder'], '#__pages', 'images', $data['images']);
