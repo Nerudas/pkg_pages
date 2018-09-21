@@ -57,33 +57,11 @@ $doc->addScriptDeclaration('
 				<div class="content-field control-group">
 					<?php echo $this->form->getInput('images'); ?>
 				</div>
-				<?php echo $this->form->renderField('imagefolder'); ?>
+				<?php echo $this->form->renderField('images_folder'); ?>
 			</div>
 			<div class="span5">
 				<div class="control-group">
-					<div class="well">
-						<div class="lead">
-							<?php echo Text::_('COM_PAGES_PAGE_SHORTCODES'); ?>
-						</div>
-						<div>
-							<div class="row-fluid">
-								<div class="span4 text-right"><strong class="text-error">{id}</strong></div>
-								<div class="span8"><?php echo Text::_('COM_PAGES_PAGE_SHORTCODES_ID'); ?></div>
-							</div>
-							<div class="row-fluid">
-								<div class="span4 text-right"><strong class="text-error">{title}</strong></div>
-								<div class="span8">
-									<?php echo Text::_('COM_PAGES_PAGE_SHORTCODES_TITLE'); ?>
-								</div>
-							</div>
-							<div class="row-fluid">
-								<div class="span4 text-right"><strong class="text-error">{imageFolder}</strong></div>
-								<div class="span8">
-									<?php echo Text::_('COM_PAGES_PAGE_SHORTCODES_IMAGEFOLDER'); ?>
-								</div>
-							</div>
-						</div>
-					</div>
+
 				</div>
 				<div class="extends control-group">
 					<div class="lead">
@@ -112,19 +90,13 @@ $doc->addScriptDeclaration('
 		</div>
 		<?php echo HTMLHelper::_('bootstrap.endTab'); ?>
 
-		<?php
-		echo HTMLHelper::_('bootstrap.addTab', 'myTab', 'tags', Text::_('JTAG'));
-		echo $this->form->getInput('tags');
-		echo HTMLHelper::_('bootstrap.endTab');
-		?>
-
 		<?php echo HTMLHelper::_('bootstrap.addTab', 'myTab', 'publishing', Text::_('JGLOBAL_FIELDSET_PUBLISHING')); ?>
 		<div class="row-fluid form-horizontal-desktop">
 			<div class="span6">
 				<?php echo $this->form->renderFieldset('publishingdata'); ?>
 			</div>
 			<div class="span6">
-				<?php echo $this->form->renderFieldset('metadata'); ?>
+
 			</div>
 		</div>
 		<?php echo HTMLHelper::_('bootstrap.endTab'); ?>

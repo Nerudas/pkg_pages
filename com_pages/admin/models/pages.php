@@ -11,8 +11,6 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\MVC\Model\ListModel;
-use Joomla\Utilities\ArrayHelper;
-use Joomla\CMS\Helper\TagsHelper;
 
 class PagesModelPages extends ListModel
 {
@@ -67,9 +65,6 @@ class PagesModelPages extends ListModel
 		$published = $this->getUserStateFromRequest($this->context . '.filter.published', 'filter_published', '');
 		$this->setState('filter.published', $published);
 
-		$tags = $this->getUserStateFromRequest($this->context . '.filter.tags', 'filter_tags', '');
-		$this->setState('filter.tags', $tags);
-
 		// List state information.
 		$ordering  = empty($ordering) ? 'p.id' : $ordering;
 		$direction = empty($direction) ? 'asc' : $direction;
@@ -94,7 +89,6 @@ class PagesModelPages extends ListModel
 	{
 		$id .= ':' . $this->getState('filter.search');
 		$id .= ':' . $this->getState('filter.published');
-		$id .= ':' . serialize($this->getState('filter.tags'));
 
 		return parent::getStoreId($id);
 	}
@@ -119,22 +113,6 @@ class PagesModelPages extends ListModel
 		{
 			$query->where('p.state = ' . (int) $published);
 		}
-
-		// Filter by tags.
-		$tags = $this->getState('filter.tags');
-		if (is_array($tags))
-		{
-			$tags = ArrayHelper::toInteger($tags);
-			$tags = implode(',', $tags);
-			if (!empty($tags))
-			{
-				$query->join('LEFT', $db->quoteName('#__contentitem_tag_map', 'tagmap')
-					. ' ON ' . $db->quoteName('tagmap.content_item_id') . ' = ' . $db->quoteName('p.id')
-					. ' AND ' . $db->quoteName('tagmap.type_alias') . ' = ' . $db->quote('com_pages.page'))
-					->where($db->quoteName('tagmap.tag_id') . ' IN (' . $tags . ')');
-			}
-		}
-
 		// Filter by search.
 		$search = $this->getState('filter.search');
 		if (!empty($search))
@@ -185,30 +163,4 @@ class PagesModelPages extends ListModel
 
 		return $this->getDbo()->loadObjectList('id');
 	}
-
-	/**
-	 * Method to get an array of data items.
-	 *
-	 * @return  mixed  An array of data items on success, false on failure.
-	 *
-	 * @since 1.0.0
-	 */
-	public function getItems()
-	{
-		$items = parent::getItems();
-
-		if (!empty($items))
-		{
-			foreach ($items as &$item)
-			{
-				// Get Tags
-				$item->tags = new TagsHelper;
-				$item->tags->getItemTags('com_pages.page', $item->id);
-			}
-		}
-
-		return $items;
-	}
-
-
 }

@@ -12,19 +12,20 @@
 			   hint="COM_PAGES_PAGE_CONTENT"
 			   filter="JComponentHelper::filterText"
 			   buttons="true"/>
-		<field name="tags" type="advtags"
-			   label="JTAG"
-			   multiple="true"/>
 	</fieldset>
 	<fieldset name="images" label="COM_PAGES_PAGE_IMAGES">
-		<field name="imagefolder" type="imagefolder" path="images/pages"/>
-		<field name="header" type="ajaximage"
+		<field name="images_folder" type="folder"
+			   label="JGLOBAL_FIELD_IMAGES_FOLDER_LABEL"/>
+		<field name="header" type="image"
+			   label="COM_PAGES_PAGE_HEADER"
+			   folder_field="images_folder"
 			   filename="header"
-			   label="COM_PAGES_PAGE_HEADER"/>
-		<field name="images" type="ajaximage"
-			   multiple="true"
-			   subfolder="content"
-			   label="COM_PAGES_PAGE_IMAGES"/>
+			   class="span12"/>
+		<field name="images" type="images"
+			   label="COM_PAGES_PAGE_IMAGES"
+			   folder_field="images_folder"
+			   folder="content"
+			   text="false"/>
 	</fieldset>
 	<fieldset name="css" label="COM_PAGES_PAGE_CSS">
 		<fields name="css">

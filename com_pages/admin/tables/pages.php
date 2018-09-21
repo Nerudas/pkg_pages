@@ -11,7 +11,6 @@
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Table\Table;
-use Joomla\CMS\Table\Observer\Tags;
 
 class PagesTablePages extends Table
 {
@@ -28,7 +27,5 @@ class PagesTablePages extends Table
 
 		// Set the alias since the column is called state
 		$this->setColumnAlias('published', 'state');
-
-		Tags::createObserver($this, array('typeAlias' => 'com_pages.page'));
 	}
 }

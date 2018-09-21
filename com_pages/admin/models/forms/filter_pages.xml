@@ -7,11 +7,6 @@
 			<option value="1">JPUBLISHED</option>
 			<option value="-2">JTRASHED</option>
 		</field>
-		<field name="tags" type="advtags"
-			   layout="joomla.form.field.advtags.select"
-			   multiple="true"
-			   class="multipleTags"
-			   onchange="this.form.submit();"/>
 	</fields>
 
 	<fields name="list">

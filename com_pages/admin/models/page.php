@@ -13,39 +13,23 @@ defined('_JEXEC') or die;
 use Joomla\CMS\MVC\Model\AdminModel;
 use Joomla\CMS\Factory;
 use Joomla\Registry\Registry;
-use Joomla\CMS\Helper\TagsHelper;
-use Joomla\CMS\Filter\InputFilter;
 use Joomla\CMS\Table\Table;
-use Joomla\CMS\Uri\Uri;
 use Joomla\CMS\Form\Form;
+
+JLoader::register('FieldTypesFilesHelper', JPATH_PLUGINS . '/fieldtypes/files/helper.php');
+
 
 class PagesModelPage extends AdminModel
 {
-	/**
-	 * Imagefolder helper helper
-	 *
-	 * @var    new imageFolderHelper
-	 *
-	 * @since  1.0.0
-	 */
-	protected $imageFolderHelper = null;
 
 	/**
-	 * Constructor.
+	 * Images root path
 	 *
-	 * @param   array $config An optional associative array of configuration settings.
+	 * @var    string
 	 *
-	 * @see     AdminModel
-	 *
-	 * @since   1.0.0
+	 * @since  1.1.0
 	 */
-	public function __construct($config = array())
-	{
-		JLoader::register('imageFolderHelper', JPATH_PLUGINS . '/fieldtypes/ajaximage/helpers/imagefolder.php');
-		$this->imageFolderHelper = new imageFolderHelper('images/pages');
-
-		parent::__construct($config);
-	}
+	protected $images_root = 'images/pages';
 
 	/**
 	 * Method to get a single record.
@@ -60,10 +44,6 @@ class PagesModelPage extends AdminModel
 	{
 		if ($item = parent::getItem($pk))
 		{
-			// Convert the metadata field to an array.
-			$registry       = new Registry($item->metadata);
-			$item->metadata = $registry->toArray();
-
 			// Convert the js field to an array.
 			$registry  = new Registry($item->css);
 			$item->css = $registry->toArray();
@@ -75,10 +55,6 @@ class PagesModelPage extends AdminModel
 			// Convert the attribs field to an array.
 			$registry      = new Registry($item->attribs);
 			$item->attribs = $registry->toArray();
-
-			// Get Tags
-			$item->tags = new TagsHelper;
-			$item->tags->getTagIds($item->id, 'com_pages.page');
 		}
 
 		return $item;
@@ -137,11 +113,8 @@ class PagesModelPage extends AdminModel
 			$form->setFieldAttribute('state', 'filter', 'unset');
 		}
 
-		// Set update images links
-		$saveurl = Uri::base(true) . '/index.php?option=com_pages&task=page.updateImages&id='
-			. $id . '&field=';
-		$form->setFieldAttribute('header', 'saveurl', $saveurl . 'header');
-		$form->setFieldAttribute('images', 'saveurl', $saveurl . 'images');
+		// Set images folder root
+		$form->setFieldAttribute('images_folder', 'root', $this->images_root);
 
 		return $form;
 	}
@@ -176,11 +149,10 @@ class PagesModelPage extends AdminModel
 	 */
 	public function save($data)
 	{
-		$pk     = (!empty($data['id'])) ? $data['id'] : (int) $this->getState($this->getName() . '.id');
-		$filter = InputFilter::getInstance();
-		$table  = $this->getTable();
-		$db     = Factory::getDbo();
-		$isNew  = true;
+		$pk    = (!empty($data['id'])) ? $data['id'] : (int) $this->getState($this->getName() . '.id');
+		$table = $this->getTable();
+		$db    = Factory::getDbo();
+		$isNew = true;
 
 		// Load the row if saving an existing type.
 		if ($pk > 0)
@@ -191,16 +163,6 @@ class PagesModelPage extends AdminModel
 
 		$data['id'] = (!isset($data['id'])) ? 0 : $data['id'];
 
-		if (isset($data['metadata']) && isset($data['metadata']['author']))
-		{
-			$data['metadata']['author'] = $filter->clean($data['metadata']['author'], 'TRIM');
-		}
-
-		if (isset($data['metadata']) && is_array($data['metadata']))
-		{
-			$registry         = new Registry($data['metadata']);
-			$data['metadata'] = (string) $registry;
-		}
 
 		if (isset($data['css']) && is_array($data['css']))
 		{
@@ -220,54 +182,20 @@ class PagesModelPage extends AdminModel
 			$data['attribs'] = (string) $registry;
 		}
 
-		// Get tags search
-		if (!empty($data['tags']))
-		{
-			$query = $db->getQuery(true)
-				->select(array('id', 'title'))
-				->from('#__tags')
-				->where('id IN (' . implode(',', $data['tags']) . ')');
-			$db->setQuery($query);
-			$tags = $db->loadObjectList();
-
-			$tags_search = array();
-			$tags_map    = array();
-			foreach ($tags as $tag)
-			{
-				$tags_search[$tag->id] = $tag->title;
-				$tags_map[$tag->id]    = '[' . $tag->id . ']';
-			}
-
-			$data['tags_search'] = implode(', ', $tags_search);
-			$data['tags_map']    = implode('', $tags_map);
-		}
-		else
-		{
-			$data['tags_search'] = '';
-			$data['tags_map']    = '';
-		}
-
 		if (parent::save($data))
 		{
 			$id = $this->getState($this->getName() . '.id');
+
 			// Save images
-			$data['imagefolder'] = (!empty($data['imagefolder'])) ? $data['imagefolder'] :
-				$this->imageFolderHelper->getItemImageFolder($id);
-
-			if ($isNew)
+			if ($isNew && !empty($data['images_folder']))
 			{
-				$data['header'] = (isset($data['header'])) ? $data['header'] : '';
-				$data['images'] = (isset($data['images'])) ? $data['images'] : array();
-			}
+				$filesHelper = new FieldTypesFilesHelper();
+				$filesHelper->moveTemporaryFolder($data['images_folder'], $id, $this->images_root);
 
-			if (isset($data['header']))
-			{
-				$this->imageFolderHelper->saveItemImages($id, $data['imagefolder'], '#__pages', 'header', $data['header']);
-			}
-
-			if (isset($data['images']))
-			{
-				$this->imageFolderHelper->saveItemImages($id, $data['imagefolder'], '#__pages', 'images', $data['images']);
+				$update          = new stdClass();
+				$update->id      = $id;
+				$update->content = str_replace($data['images_folder'], $this->images_root . '/' . $id, $data['content']);
+				$db->updateObject('#__pages', $update, array('id'));
 			}
 
 			return $id;
@@ -289,10 +217,12 @@ class PagesModelPage extends AdminModel
 	{
 		if (parent::delete($pks))
 		{
+			$filesHelper = new FieldTypesFilesHelper();
+
 			// Delete images
 			foreach ($pks as $pk)
 			{
-				$this->imageFolderHelper->deleteItemImageFolder($pk);
+				$filesHelper->deleteItemFolder($pk, $this->images_root);
 			}
 
 			return true;
