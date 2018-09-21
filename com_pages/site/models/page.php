@@ -15,9 +15,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 use Joomla\Registry\Registry;
-use Joomla\CMS\Helper\TagsHelper;
 use Joomla\CMS\Table\Table;
-use Joomla\CMS\Uri\Uri;
 
 class PagesModelPage extends ItemModel
 {
@@ -105,21 +103,10 @@ class PagesModelPage extends ItemModel
 				// Link
 				$data->link = Route::_(PagesHelperRoute::getPageRoute($data->id));
 
-				$data->imageFolder = $this->imageFolderHelper->getItemImageFolder($data->id);
-				$data->header      = (!empty($data->header) && JFile::exists(JPATH_ROOT . '/' . $data->header)) ?
-					Uri::root(true) . '/' . $data->header : false;
-
-				// Convert the images field to an array.
-				$registry     = new Registry($data->images);
-				$data->images = $registry->toArray();
-
-				// Prepare content
-				$data->content = str_replace('{id}', $data->id, $data->content);
-				$data->content = str_replace('{title}', $data->title, $data->content);
-				$data->content = str_replace('{imageFolder}', $data->imageFolder . '/content', $data->content);
-
-				// Convert the metadata field
-				$data->metadata = new Registry($data->metadata);
+				JLoader::register('FieldTypesFilesHelper', JPATH_PLUGINS . '/fieldtypes/files/helper.php');
+				$imagesHelper = new FieldTypesFilesHelper();
+				$imageFolder  = 'images/pages/' . $data->id;
+				$data->header = $imagesHelper->getImage('header', $imageFolder, false, false);
 
 				// Convert the css field
 				$data->css = new Registry($data->css);
@@ -127,15 +114,11 @@ class PagesModelPage extends ItemModel
 				// Convert the js field
 				$data->js = new Registry($data->js);
 
-				// Get Tags
-				$data->tags = new TagsHelper;
-				$data->tags->getItemTags('com_pages.page', $data->id);
 
 				// Convert parameter fields to objects.
 				$registry     = new Registry($data->attribs);
 				$data->params = clone $this->getState('params');
 				$data->params->merge($registry);
-
 
 				$this->_item[$pk] = $data;
 			}
