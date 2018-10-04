@@ -27,24 +27,6 @@ class PagesModelPage extends ItemModel
 	 * @since  1.0.0
 	 */
 	protected $_context = 'com_pages.page';
-
-	/**
-	 * Constructor.
-	 *
-	 * @param   array $config An optional associative array of configuration settings.
-	 *
-	 * @see     AdminModel
-	 *
-	 * @since   1.0.0
-	 */
-	public function __construct($config = array())
-	{
-		JLoader::register('imageFolderHelper', JPATH_PLUGINS . '/fieldtypes/ajaximage/helpers/imagefolder.php');
-		$this->imageFolderHelper = new imageFolderHelper('images/pages');
-
-		parent::__construct($config);
-	}
-
 	/**
 	 * Method to auto-populate the model state.
 	 *
